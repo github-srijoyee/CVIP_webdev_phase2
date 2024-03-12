@@ -6,8 +6,8 @@ import generateTokenAndSetCookie from "../utils/generateToken.js";
 export const signup=async (req,res)=>{
     try {
         const {fullName,username,password,confirmPassword,gender}=req.body;
-    if(password!=confirmPassword){
-        return res.status(400).json({error:"Wrong Password provided"})
+    if(password!==confirmPassword){
+        return res.status(400).json({error:"Passwords didn't match"});
     }
     const user=await User.findOne({username});
 
@@ -37,7 +37,7 @@ if(newUser){
     _id:newUser.id,
     fullName:newUser.fullName,
     username:newUser.username,
-    profilePic:newUser.profilePic
+    profilePic:newUser.profilePic,
 })
 }else{
     res.status(400).json("Invalid User Credentials");
